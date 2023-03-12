@@ -4,4 +4,8 @@ python -m venv venv
 
 pip install -U pip
 
+pip install -r requirements.txt
+
+python requirements.py
+
 uvicorn api.api:app --host 0.0.0.0 --reload
