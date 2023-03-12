@@ -8,15 +8,14 @@ import os
 
 from abc import ABC,abstractmethod
 
-import logging 
+import logging
 
 logger = logging.getLogger(__name__)
 logger.setLevel(config.LOGLEVEL)
 
-import coloredlogs 
+import coloredlogs
 
 coloredlogs.install()
-
 
 class spell_corrector(ABC):
 
@@ -27,28 +26,26 @@ class spell_corrector(ABC):
     def replace(self,match):
         return config.replacements[match.group(0)]
 
-
-    def fix_common_mistakes_in_answer(self,answer):    
+    def fix_common_mistakes_in_answer(self,answer):
         # Example:
         # "This is a text Dr.Henri wrote.This is another text,and it now has one space after the comma."
         # is transformed to
         # 'This is a text Dr. Henri wrote. This is another text, and it now has one space after the comma.'
         answer = re.sub(r'(?<=[.,])(?=[^\s])', r' ', answer)
-        
+
         ## Example:
         ## 'the the cat has this thistle thats long cuz it is.'
         # is transformed to
         ## 'the cat has this thistle that's long because it is.'
-        answer = re.sub('|'.join(r'\b%s\b' % re.escape(s) for s in config.replacements), 
+        answer = re.sub('|'.join(r'\b%s\b' % re.escape(s) for s in config.replacements),
                 self.replace, answer)
 
         return answer
 
-
     def correct_spell(self,essay):
         ## instancia o objeto spell checker
         spell = SpellChecker()
- 
+
         essay = self.fix_common_mistakes_in_answer(essay)
 
         ## começa o texto do novo essay
@@ -68,12 +65,13 @@ class spell_corrector(ABC):
             for word in misspelled:
                 ## obtém a palavra correta
                 fixed_word = spell.correction(word)
-                #print('%s -> %s' % (word, fixed_word))
+                # print('%s -> %s' % (word, fixed_word))
+                if fixed_word is None: continue
                 ## corrige a sentença
                 sentence = sentence.replace(word, fixed_word)
 
             new_essay = new_essay + " " + sentence
-            
+
         return new_essay
 
     def correct_texts(self):
@@ -90,7 +88,7 @@ class spell_corrector(ABC):
             df = pd.read_parquet(os.path.join(self.output_directory,self.output_file))
 
         logging.info(f'correcting {self.text_type} texts')
-    
+
 
         for i in range(len(df)):
             if(df.loc[i,self.new_column] != "-"):
@@ -98,15 +96,12 @@ class spell_corrector(ABC):
             df.loc[i,self.new_column] = self.correct_spell(df.loc[i,self.old_column])
 
             if(i%20 == 0):
-                logging.info("corrected text" + str(i))
+                logging.info("corrected text " + str(i) + " of " + str(len(df)))
                 df.to_parquet(os.path.join(self.output_directory,self.output_file))
         ## escreve o parquet final
         df.to_parquet(os.path.join(self.output_directory,self.output_file))
-    
+
         logging.info(f'corrected all {self.text_type} texts')
-
-
-
 
 class essay_corrector(spell_corrector):
 
@@ -114,7 +109,7 @@ class essay_corrector(spell_corrector):
         super().__init__()
 
         self.input_directory = os.path.join(config.ESSAY_CONTAINER,'raw')
-        self.input_file =  'training_set_rel3.xlsx'
+        self.input_file =  'essays.xlsx'
         self.output_directory = os.path.join(config.ESSAY_CONTAINER,'raw')
 
         self.relevant_columns = ["essay_id","essay_set","essay","domain1_score","domain2_score"]
@@ -133,6 +128,3 @@ class short_answer_corrector(spell_corrector):
         self.relevant_columns = ["Id","EssaySet","EssayText","Score1","Score2"]
         self.old_column = "EssayText"
         self.text_type = "short_answer"
-    
-
- 
