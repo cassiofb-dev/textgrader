@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  backend:
+    container_name: backend
+    image: python:3.9
+    restart: always
+    working_dir: "/backend"
+    command: sh backend.sh
+    ports:
+      - 8000:8000
+    volumes:
+      - ./backend:/backend
+
+  frontend:
+    container_name: frontend
+    image: node:lts-alpine
+    working_dir: "/frontend"
+    command: sh frontend.sh
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend:/frontend
+    depends_on:
+      - backend
