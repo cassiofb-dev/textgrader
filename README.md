@@ -49,7 +49,7 @@ Run in your terminal ``docker compose up -d``. You can access from your browser:
 This project uses [GitFlow](http://danielkummer.github.io/git-flow-cheatsheet/) workflow and extension:
 
 - Start your new feature: ``git flow feature start FEATURE_NAME``
-- Finish your feature: ``git flow feature finish FEATURE_NAME``
+- Finish your feature: Open a Pull request from your feature branch to develop
 
 This project also uses [Semantic Commit Messages](https://gist.github.com/joshbuchea/6f47e86d2510bce28f8e7f42ae84c716):
 
