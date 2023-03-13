@@ -6,7 +6,10 @@ services:
     image: python:3.9
     restart: always
     working_dir: "/backend"
-    command: sh backend.sh
+    command: sh -c "
+      python -m venv venv && . venv/bin/activate && pip install -U pip &&
+      pip install -r requirements.txt && python requirements.py &&
+      uvicorn api.api:app --host 0.0.0.0 --reload"
     ports:
       - 8000:8000
     volumes:
@@ -16,7 +19,7 @@ services:
     container_name: frontend
     image: node:lts-alpine
     working_dir: "/frontend"
-    command: sh frontend.sh
+    command: sh -c "npm i && npm run dev"
     ports:
       - 3000:3000
     volumes:
