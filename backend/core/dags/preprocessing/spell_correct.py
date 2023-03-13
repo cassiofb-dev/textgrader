@@ -122,7 +122,7 @@ class short_answer_corrector(spell_corrector):
         super().__init__()
 
         self.input_directory = os.path.join(config.SHORT_ANSWER_CONTAINER,'raw')
-        self.input_file =  'train.xlsx'
+        self.input_file =  'short_answers.xlsx'
         self.output_directory = os.path.join(config.SHORT_ANSWER_CONTAINER,'raw')
 
         self.relevant_columns = ["Id","EssaySet","EssayText","Score1","Score2"]
