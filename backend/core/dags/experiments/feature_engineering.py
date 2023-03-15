@@ -1,25 +1,19 @@
-from msilib.schema import Directory
-from dags.utils import * 
+from dags.utils import *
 from dags.model_training.train_model import pipeline_random_forest
 from dags.feature_engineering.word_embeddings import *
 from dags.feature_engineering.latent_semantic_indexing import *
 
-import os 
-
-
+import os
 
 import pandas as pd
 from dags.predict.predict import *
 from dags import config
 
-import logging 
-
-
+import logging
 
 logger = logging.getLogger(__name__)
 logger.setLevel(config.LOGLEVEL)
 
- 
 def generate_topics_datasets(selected_container,text_range):
     logger.info("Starting to generate LSI features")
 
@@ -34,7 +28,7 @@ def generate_topics_datasets(selected_container,text_range):
 
 
             input_filename = f'text_set_{i}_domain_1.parquet'
-        
+
             df_train = pd.read_parquet(os.path.join(lsi.input_train_directory,input_filename))
             df_test =  pd.read_parquet(os.path.join(lsi.input_test_directory,input_filename))
 
@@ -53,7 +47,6 @@ def generate_topics_datasets(selected_container,text_range):
             save_parquet(embedded_test,output_test_path,output_filename)
         logger.info("Generated LSI features")
 
-
     def generate_use_embeddings(selected_container,text_range):
         use = USE_embedder()
 
@@ -61,7 +54,7 @@ def generate_topics_datasets(selected_container,text_range):
 
         print("deveria ter logado")
 
-        for i in text_range:       
+        for i in text_range:
             logger.info(f'text {i}')
 
             input_train_directory = os.path.join(selected_container,'interim','train')
@@ -75,16 +68,14 @@ def generate_topics_datasets(selected_container,text_range):
             embedded_train = use.generate_embed_features(df_train)
             embedded_test =  use.generate_embed_features(df_test)
 
-            output_train_directory = os.path.join(selected_container,'processed','train',f'set_{i}','domain_1')  
-            output_test_directory = os.path.join(selected_container,'processed','test',f'set_{i}','domain_1') 
+            output_train_directory = os.path.join(selected_container,'processed','train',f'set_{i}','domain_1')
+            output_test_directory = os.path.join(selected_container,'processed','test',f'set_{i}','domain_1')
             output_filename = f'universal_sentence_encoder.parquet'
 
             save_parquet(embedded_train,output_train_directory,output_filename)
             save_parquet(embedded_test,output_test_directory,output_filename)
-        
+
         logger.info('generated embeddings with universal sentence encoder')
-
-
 
 def generate_d2v_embeddings(selected_container,text_range,vector_list = [512,256,128,64,32]):
     for vector_size in vector_list:
@@ -92,9 +83,9 @@ def generate_d2v_embeddings(selected_container,text_range,vector_list = [512,256
         d2v = doc_2_vec_embedder(vector_size)
 
         for i in text_range:
-            
+
             logger.info(f'text {i}')
-    
+
             input_train_directory = os.path.join(selected_container,'interim','train')
             input_test_directory = os.path.join(selected_container,'interim','test')
 
@@ -107,8 +98,8 @@ def generate_d2v_embeddings(selected_container,text_range,vector_list = [512,256
             embedded_train = d2v.generate_embed_features(df_train)
             embedded_test =  d2v.generate_embed_features(df_test)
 
-            output_train_directory = os.path.join(selected_container,'processed','train',f'set_{i}','domain_1')  
-            output_test_directory = os.path.join(selected_container,'processed','test',f'set_{i}','domain_1') 
+            output_train_directory = os.path.join(selected_container,'processed','train',f'set_{i}','domain_1')
+            output_test_directory = os.path.join(selected_container,'processed','test',f'set_{i}','domain_1')
             output_filename = f'doc_2_vec_{vector_size}.parquet'
 
             save_parquet(embedded_train,output_train_directory,output_filename)
@@ -116,16 +107,10 @@ def generate_d2v_embeddings(selected_container,text_range,vector_list = [512,256
 
     logger.info('Finished to generate embeddings with doc 2 vec')
 
-
-
-
-    
 def generate_features(selected_container,text_range):
     generate_d2v_embeddings(selected_container,text_range = text_range)
     generate_use_embeddings(selected_container,text_range = text_range)
- 
+
     generate_topics_datasets(selected_container,text_range = text_range)
 
     logger.info('Finished to generate features with all methods')
-
-

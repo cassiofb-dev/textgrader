@@ -99,13 +99,13 @@ def task_pipeline_essays():
 
 def task_pipeline_short_answer():
     task_correct_short_answers()
-    logger.info("corrigiu as respostas curtas")
+    logger.info("finished to correct short answers")
 
     task_generate_short_answer_datasets()
-    print("gerou os datasets de resposta curta")
+    print("finished to generate short answers datasets")
 
     task_shared_tasks(selected_container = config.SHORT_ANSWER_CONTAINER,text_range = config.SHORT_ANSWER_TEXT_RANGE)
-    print("gerou os datasets de resposta curta")
+    print("finished to generate short answers datasets")
 
 
 
