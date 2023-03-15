@@ -95,9 +95,8 @@ class spell_corrector(ABC):
                 continue
             df.loc[i,self.new_column] = self.correct_spell(df.loc[i,self.old_column])
 
-            if(i%20 == 0):
-                logging.info("corrected text " + str(i) + " of " + str(len(df)))
-                df.to_parquet(os.path.join(self.output_directory,self.output_file))
+            logging.info("corrected text " + str(i) + " of " + str(len(df)))
+            df.to_parquet(os.path.join(self.output_directory,self.output_file))
         ## escreve o parquet final
         df.to_parquet(os.path.join(self.output_directory,self.output_file))
 
