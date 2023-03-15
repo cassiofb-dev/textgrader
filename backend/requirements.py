@@ -69,6 +69,8 @@ def download_and_convert_uol_corpus_essays():
     for essay in corpus_essays:
       essay_id += 1
 
+      if len(essay['texto']) == 0: continue
+
       corpus_essays_dict['essay_id'].append(essay_id)
       corpus_essays_dict['essay_set'].append(essay_set)
       corpus_essays_dict['essay'].append(essay['texto'])
