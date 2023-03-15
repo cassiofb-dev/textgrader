@@ -61,10 +61,14 @@ def download_and_convert_uol_corpus_essays():
   for column in ESSAY_XLSX_COLUMNS:
     corpus_essays_dict[column] = []
 
+  essay_id = 0
+
   for essay_set, corpus_essays_json in enumerate(CORPUS_ESSAYS_JSONS):
     corpus_essays = corpus_essays_json['redacoes']
 
-    for essay_id, essay in enumerate(corpus_essays):
+    for essay in corpus_essays:
+      essay_id += 1
+
       corpus_essays_dict['essay_id'].append(essay_id)
       corpus_essays_dict['essay_set'].append(essay_set)
       corpus_essays_dict['essay'].append(essay['texto'])
