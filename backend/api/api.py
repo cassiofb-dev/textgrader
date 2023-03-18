@@ -12,9 +12,9 @@ def home():
   return response
 
 @app.get("/text_grade/")
-async def text_grade():
+async def text_grade(essay: str) -> dict[str, int]:
   response = {
-    "message": "Text Grade core endpoint, work in progress..."
+    "grade": 100
   }
 
   return response
