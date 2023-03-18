@@ -17,13 +17,17 @@ ESSAY_CONTAINER = os.path.join('datalake','essay')
 SHORT_ANSWER_CONTAINER = os.path.join('datalake','short_answer')
 SHARED_CONTAINER = os.path.join('datalake','shared_container')
 
-ESSAY_TEXT_RANGE = range(1,9)
+ESSAY_TEXT_RANGE = range(0,4)
 SHORT_ANSWER_TEXT_RANGE = range(1,11)
 
 #CURRENT_TEXT_RANGE = range(1,9)
 CURRENT_TEXT_RANGE = None
 
 RETRAIN_DOC_TO_VEC = True
+
+ESSAY_ONLY = True
+
+BYPASS_CORRECTOR = True
 
 LOGLEVEL = logging.INFO
 
