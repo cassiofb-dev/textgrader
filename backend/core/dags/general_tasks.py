@@ -13,8 +13,9 @@ from dags.experiments.experiments import *
 from dags import config 
 from dags import utils
 
+import pandas as pd
 
-
+import os
 
 logging.getLogger(__name__).setLevel(logging.INFO)
 logger = logging.getLogger(__name__)
@@ -31,7 +32,12 @@ def run_dag(task):
 
 def task_correct_essays():
     ec = essay_corrector()
-    ec.correct_texts()
+
+    if config.BYPASS_CORRECTOR:
+        ec.bypass_correction()
+    else:
+        ec.correct_texts()
+
     logger.info("finished to correct essays")
     
 def task_generate_essay_datasets():

@@ -102,6 +102,13 @@ class spell_corrector(ABC):
 
         logging.info(f'corrected all {self.text_type} texts')
 
+    def bypass_correction(self):
+        essay_df = pd.read_excel(os.path.join(self.input_directory, self.input_file))
+
+        essay_df['new_text'] = essay_df['essay']
+
+        essay_df.to_parquet(os.path.join(self.output_directory, self.output_file))
+
 class essay_corrector(spell_corrector):
 
     def __init__(self):
