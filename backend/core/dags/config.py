@@ -17,7 +17,7 @@ ESSAY_CONTAINER = os.path.join('datalake','essay')
 SHORT_ANSWER_CONTAINER = os.path.join('datalake','short_answer')
 SHARED_CONTAINER = os.path.join('datalake','shared_container')
 
-ESSAY_TEXT_RANGE = range(0,4)
+ESSAY_TEXT_RANGE = range(1,2)
 SHORT_ANSWER_TEXT_RANGE = range(1,11)
 
 #CURRENT_TEXT_RANGE = range(1,9)

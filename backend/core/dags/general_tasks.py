@@ -82,7 +82,6 @@ def task_train_doc_2_vec():
 def task_shared_tasks(selected_container,text_range):
     if config.RETRAIN_DOC_TO_VEC:
         task_train_doc_2_vec()
-        print("word 2 vec treinado")
 
     task_generate_features(selected_container,text_range = text_range)
     task_train_models(selected_container,text_range= text_range)
