@@ -4,7 +4,6 @@ services:
   backend:
     container_name: backend
     image: python:3.10
-    restart: always
     working_dir: "/backend"
     command: sh -c "
       python -m venv venv && . venv/bin/activate && pip install -U pip &&
