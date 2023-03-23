@@ -1,14 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from 'antd';
+import { Container, Title, TextArea, ButtonsContainer } from '@/styles/redacao/styles';
 
 const Redacao = () => {
+    const [value, setValue] = useState('');
+
+    const handleResetClick = () => {
+        setValue('');
+    };
+
+    const handleTextAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setValue(event.target.value);
+    };
+    
     return (
-        <div className="site-layout" style={{ padding: '0 50px' }}>
-            <h1 style={{ textAlign: 'center' }}>Redação</h1>
-            <div style={{ padding: 24, minHeight: 380, background: 'white' }}>Escreva aqui...</div>
-            <br />
-            <Button type="primary">Enviar redação</Button>
-        </div>
+        <Container>
+            <Title>Redação</Title>
+            <TextArea placeholder="Sua redação aqui." value={value} onChange={handleTextAreaChange} />
+            <ButtonsContainer>
+                <Button>Enviar</Button>
+                <Button onClick={handleResetClick}>Reset</Button>
+            </ButtonsContainer>
+
+        </Container>
     );
 };
 

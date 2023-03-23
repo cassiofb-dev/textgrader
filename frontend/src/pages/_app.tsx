@@ -1,26 +1,35 @@
+import { Content, Footer, Layout, Menu, MenuItem, Span, LinkContent } from '@/styles/app/styles';
 import '@/styles/globals.css'
 import 'antd/dist/reset.css';
-import { Layout, Menu } from 'antd'
-import { Header, Content, Footer } from 'antd/lib/layout/layout'
+
 import type { AppProps } from 'next/app'
+import { Link } from '../../components/link';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <Layout style={{ minHeight: "100vh" }}>
-      <Header style={{ position: 'sticky', top: 0, zIndex: 1, width: '100%' }}>
-        <Menu
-          theme="dark"
-          mode="horizontal"
-          defaultSelectedKeys={['2']}
-          items={[
-            { key: 'inicio', label: 'Início' },
-            { key: 'redacao', label: 'Redação' },
-            { key: 'notas', label: 'Notas' },
-          ]}
-        />
-      </Header>
-      <Content style={ {padding: '20px 0'} } ><Component {...pageProps} /></Content>
-      <Footer style={{ textAlign: 'center' }}>©2023 Created by Pettine - Cássio - Julie</Footer>
+    <Layout>
+      <Menu mode="horizontal" theme="dark">
+        <MenuItem key="home">
+          <Link href="/">Home</Link>
+        </MenuItem>
+        <MenuItem key="about">
+          <Link href="/redacao">Redação</Link>
+        </MenuItem>
+        <MenuItem key="nota">
+          <Link href="/nota">Nota</Link>
+        </MenuItem>
+      </Menu>
+      <Content>
+        <Component {...pageProps} />
+      </Content>
+      <Footer>
+        <Span>©2023 Created by</Span>
+        <LinkContent>
+          <Link href="https://github.com/cassiofb-dev">Cássio</Link>
+          <Link href="https://github.com/juliemoura">Julie</Link>
+          <Link href="https://github.com/Gustavo-Pettine">Pettine</Link>
+        </LinkContent>
+      </Footer>
     </Layout>
   )
 }

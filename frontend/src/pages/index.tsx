@@ -1,11 +1,12 @@
+import { Container, Subtitle, Title } from '@/styles/home/styles';
 import React from 'react';
 
 const Home = () => {
     return (
-        <div style={{ padding: '0 50px' }}>
-            <h1 style={{ textAlign: 'center' }}>Test Grader</h1>
-            <div style={{ textAlign: 'center' }}>Um sistema para avaliação automática de redações</div>
-        </div>
+        <Container>
+            <Title>Text Grader</Title>
+            <Subtitle>Um sistema para avaliação automática de redações</Subtitle>
+        </Container>
     );
 };
 
