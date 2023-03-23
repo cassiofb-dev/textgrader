@@ -5,6 +5,8 @@ from dags.utils import *
 
 
 def predict_with_model(model,test_df,predicted_variable = "score"):
+    print(test_df.head())
+    print(model.feature_names_in_)
     X = test_df[model.feature_names_in_]
 
 
@@ -13,10 +15,12 @@ def predict_with_model(model,test_df,predicted_variable = "score"):
 
     test_df["prediction"] = y_pred
 
-    score = cohen_kappa_score(test_df["prediction"],test_df[predicted_variable], weights = "quadratic")
-    
-    return test_df , score
+    y1 = y_pred
+    y2 = test_df[predicted_variable].to_numpy().round()
 
+    score = cohen_kappa_score(y1, y2, weights = "quadratic")
+
+    return test_df , score
 
 def evaluate_lsi_predictions(topic_numbers = [10,20,30,40,50,100]):
 
@@ -27,16 +31,16 @@ def evaluate_lsi_predictions(topic_numbers = [10,20,30,40,50,100]):
     for i in range(1,9):
         score_list = []
         for topic in topic_numbers:
-            input_directory = os.path.join('essay','processed','test',f'set_{i}','domain_1')  
+            input_directory = os.path.join('essay','processed','test',f'set_{i}','domain_1')
             input_filename = f'lsi_{topic}_topics.parquet'
 
-            model_directory = os.path.join('essay','model',f'set_{i}','domain_1')  
+            model_directory = os.path.join('essay','model',f'set_{i}','domain_1')
             model_filename = f'lsi_{topic}_topics_rf_model.pkl'
 
             print(i)
             print(model_filename)
 
-            output_directory = os.path.join('essay','predictions','test',f'set_{i}','domain_1')  
+            output_directory = os.path.join('essay','predictions','test',f'set_{i}','domain_1')
             output_filename = f'lsi_{topic}_topics_predictions.parquet'
 
             test_df = pd.read_parquet(os.path.join(input_directory,input_filename)).dropna()
@@ -55,7 +59,7 @@ def evaluate_lsi_predictions(topic_numbers = [10,20,30,40,50,100]):
         df_results.columns = ['essay_set'] + [f'{topic}_topicos' for topic in topic_numbers]
 
         df_results.to_parquet(os.path.join(experiments_folder,'lsi_topics_results.parquet'))
-        
+
     return df_results
 
 
