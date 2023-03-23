@@ -7,8 +7,8 @@ services:
     working_dir: "/backend"
     command: sh -c "
       python -m venv venv && . venv/bin/activate && pip install -U pip &&
-      pip install "jax[cpu]" tensorflow-cpu tensorflow_hub scikit-learn ntlk gensim pyarrow &&
-      pip install pandas fastapi "uvicorn[standard]" orjson openpyxl colorlog pyspellchecker coloredlogs   
+      pip install -U "jax[cpu]" tensorflow-cpu tensorflow_hub scikit-learn ntlk gensim pyarrow &&
+      pip install -U pandas fastapi "uvicorn[standard]" orjson openpyxl colorlog pyspellchecker coloredlogs   
       uvicorn api.api:app --host 0.0.0.0 --reload"
     ports:
       - 8000:8000
