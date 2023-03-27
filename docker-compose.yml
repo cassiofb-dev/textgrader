@@ -4,7 +4,6 @@ services:
   backend:
     container_name: backend
     image: python:3.9
-    restart: always
     working_dir: "/backend"
     command: sh -c "
       python -m venv venv && . venv/bin/activate && pip install -U pip &&
@@ -24,5 +23,3 @@ services:
       - 3000:3000
     volumes:
       - ./frontend:/frontend
-    depends_on:
-      - backend
