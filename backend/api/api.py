@@ -1,7 +1,28 @@
 from fastapi import FastAPI
+
+from pydantic import BaseModel
+
 from fastapi.responses import ORJSONResponse
 
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI(default_response_class=ORJSONResponse)
+
+
+origins = [
+  "*",
+]
+
+app.add_middleware(
+  CORSMiddleware,
+  allow_origins=origins,
+  allow_credentials=True,
+  allow_methods=["*"],
+  allow_headers=["*"],
+)
+
+class Request(BaseModel):
+  essay: str
 
 @app.get("/")
 def home():
@@ -11,8 +32,8 @@ def home():
 
   return response
 
-@app.get("/text_grade/")
-async def text_grade(essay: str) -> dict[str, int]:
+@app.post("/text_grade/")
+async def text_grade(request: Request) -> dict[str, int]:
   response = {
     "grade": 100
   }
