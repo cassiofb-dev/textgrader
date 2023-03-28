@@ -12,7 +12,7 @@
   <a href="#license">License</a>
 </p>
 
-<!-- ![screenshot](screenshot.png) -->
+![cefet-logo](cefet-logo.jpg)
 
 ## About
 
@@ -20,22 +20,24 @@ This repository contains TextGrader. In essence textgrader contains the various 
 
 The system is divided as explained below:
 
-1. Backend (Python)
-   1. [Text Grader Core](/backend/core)
-      1. Preprocessing where we correct spelling change columns schema and do other minor preprocessing steps
-      2. Feature engineering, where we generate some basic features like word count and sentence count, and generate datasets embedding words with each one of the following 4 techniques: TF-IDF, WORD-2-VEC, USE, LSI.
-      3. Model training, where we train some instances of a random forest model using one of the following 3 approaches: Regression, Classification and Ordinal Classification.
-      4. Model Evaluation, where we use the trained models to generate predictions and evaluate those predictions.
-   2. [Text Grader API](/backend/api)
-      1. Receive a HTTP get request with a text content
-      2. Run and send the data to Text Grader Core
-      3. Receive the response from Text Grader Core
-      4. Transform the data in JSON and send the HTTP response
-2. Frontend (NodeJS)
+![diagram.png](diagram.png)
+
+1. Frontend (NodeJS)
    1. [Text Grader Website](/frontend)
       1. Show an User Interface with a Text Editor and a button to grade the text
       2. Send the text in a HTTP GET request body to Text Grader API
       3. Receive the HTTP response and show it to the user
+2. Backend (Python)
+   1. [Text Grader API](/backend/api)
+      1. Receive a HTTP get request with a text content
+      2. Run and send the data to Text Grader Core
+      3. Receive the response from Text Grader Core
+      4. Transform the data in JSON and send the HTTP response
+   2. [Text Grader Core](/backend/core)
+      1. Preprocessing where we correct spelling change columns schema and do other minor preprocessing steps
+      2. Feature engineering, where we generate some basic features like word count and sentence count, and generate datasets embedding words with each one of the following 4 techniques: TF-IDF, WORD-2-VEC, USE, LSI.
+      3. Model training, where we train some instances of a random forest model using one of the following 3 approaches: Regression, Classification and Ordinal Classification.
+      4. Model Evaluation, where we use the trained models to generate predictions and evaluate those predictions.
 
 ## Usage
 
@@ -46,9 +48,9 @@ Run in your terminal ``docker compose up -d``. You can access from your browser:
 
 ## Development
 
-This project uses [GitFlow](http://danielkummer.github.io/git-flow-cheatsheet/) workflow and extension:
+This project uses [GitFlow](http://danielkummer.github.io/git-flow-cheatsheet/) workflow:
 
-- Start your new feature: ``git flow feature start FEATURE_NAME``
+- Start your new feature: Make a new branch based on develop branch
 - Finish your feature: Open a Pull request from your feature branch to develop
 
 This project also uses [Semantic Commit Messages](https://gist.github.com/joshbuchea/6f47e86d2510bce28f8e7f42ae84c716):
