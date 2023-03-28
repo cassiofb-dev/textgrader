@@ -53,7 +53,7 @@ def experiments_with_lsi_topics(selected_container,text_range):
             save_as_pickle(model,output_directory,output_filename)
         logger.info("finished training models with LSI features")
 
-def evaluate_lsi_predictions(selected_container,text_range,topic_numbers = [10,20,30,40,50,100]):
+def evaluate_lsi_predictions(selected_container,text_range,topic_numbers = config.LSI_TOPIC_NUMBERS):
 
     logger.info(f'evaluating LSI results')
 
@@ -89,15 +89,13 @@ def evaluate_lsi_predictions(selected_container,text_range,topic_numbers = [10,2
         listao.append(tupla)
 
         df_results = pd.DataFrame.from_records(listao)
-        df_results.columns = ['text_set','10_topicos','20_topicos','30_topicos','40_topicos','50_topicos','100_topicos']
-
+        df_results.columns = config.LSI_TOPIC_COLUMNS
 
         EXPERIMENT_RESULT_FOLDER = os.path.join(selected_container,'predictions','experiment_results')
 
         save_parquet(df_results,EXPERIMENT_RESULT_FOLDER,'lsi_topics_results.parquet')
 
     logger.info(f'LSI results were evaluated')
-
 
     return df_results
 
@@ -271,8 +269,6 @@ def generate_use_embeddings(selected_container,text_range):
     use = USE_embedder()
 
     logger.info('Starting to generate embeddings with universal sentence encoder')
-
-    print("deveria ter logado")
 
     for i in text_range:
         logger.info(f'text {i}')

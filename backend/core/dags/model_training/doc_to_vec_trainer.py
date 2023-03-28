@@ -23,10 +23,16 @@ def save_short_answer_corpus():
 
 
 def get_tagged_document_corpora():
+    save_essay_corpus()
     essay_corpus = get_model_from_pickle(os.path.join(config.SHARED_CONTAINER,'model','word_embedding','corpora'),'essay_corpora.pkl')
-    short_answer_corpus = get_model_from_pickle(os.path.join(config.SHARED_CONTAINER,'model','word_embedding','corpora'),'short_answer_corpora.pkl')
-    
-    general_corpus = essay_corpus + short_answer_corpus
+
+    if config.ESSAY_ONLY:
+        general_corpus = essay_corpus
+    else:
+        save_short_answer_corpus()
+        short_answer_corpus = get_model_from_pickle(os.path.join(config.SHARED_CONTAINER,'model','word_embedding','corpora'),'short_answer_corpora.pkl')
+        general_corpus = essay_corpus + short_answer_corpus
+
     documents = [TaggedDocument(doc, [i]) for i, doc in enumerate(general_corpus)]
     
     return documents
@@ -40,8 +46,6 @@ def generate_word_to_vec_models(documents):
 
 
 def train_doc_to_vec():
-    save_essay_corpus()
-    save_short_answer_corpus()
     documents = get_tagged_document_corpora()
     generate_word_to_vec_models(documents)
 

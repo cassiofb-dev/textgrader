@@ -72,7 +72,7 @@ def download_and_convert_uol_corpus_essays():
       if len(essay['texto']) == 0: continue
 
       corpus_essays_dict['essay_id'].append(essay_id)
-      corpus_essays_dict['essay_set'].append(essay_set)
+      corpus_essays_dict['essay_set'].append(1)
       corpus_essays_dict['essay'].append(essay['texto'])
       corpus_essays_dict['rater1_domain1'].append(essay['nota'] / 2)
       corpus_essays_dict['rater2_domain1'].append(essay['nota'] / 2)
