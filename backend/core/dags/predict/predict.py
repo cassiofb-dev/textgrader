@@ -5,10 +5,7 @@ from dags.utils import *
 
 
 def predict_with_model(model,test_df,predicted_variable = "score"):
-    print(test_df.head())
-    print(model.feature_names_in_)
     X = test_df[model.feature_names_in_]
-
 
     y_pred = model.predict(X)
     y_pred = np.round(y_pred)
@@ -22,7 +19,7 @@ def predict_with_model(model,test_df,predicted_variable = "score"):
 
     return test_df , score
 
-def evaluate_lsi_predictions(topic_numbers = [10,20,30,40,50,100]):
+def evaluate_lsi_predictions(topic_numbers = config.LSI_TOPIC_NUMBERS):
 
     experiments_folder = os.path.join('essay','results')
 

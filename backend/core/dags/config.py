@@ -31,10 +31,12 @@ BYPASS_CORRECTOR = True
 
 LOGLEVEL = logging.INFO
 
-SETTINGS = {'essay':{'container':ESSAY_CONTAINER,'range':list(range(1,9))},
+SETTINGS = {'essay':{'container':ESSAY_CONTAINER,'range':list(range(1,2))},
             'short_answer': {'container':SHORT_ANSWER_CONTAINER,'range':list(range(1,11))}
             }
 
 SETTINGS_FILE = 'settings.json'
 
-LSI_TOPIC_NUMBERS = [10,20,30,40,50,100]
+LSI_TOPIC_NUMBERS = [10,20,30,40]
+
+LSI_TOPIC_COLUMNS = ['text_set','10_topics','20_topics','30_topics','40_topics']
