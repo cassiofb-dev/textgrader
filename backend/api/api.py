@@ -6,8 +6,9 @@ from fastapi.responses import ORJSONResponse
 
 from fastapi.middleware.cors import CORSMiddleware
 
-app = FastAPI(default_response_class=ORJSONResponse)
+from core.dags.predict.predict_from_text import predict_from_text
 
+app = FastAPI(default_response_class=ORJSONResponse)
 
 origins = [
   "*",
@@ -35,7 +36,7 @@ def home():
 @app.post("/text_grade/")
 async def text_grade(request: Request) -> dict[str, int]:
   response = {
-    "grade": 100
+    "grade": predict_from_text(request.essay)
   }
 
   return response
