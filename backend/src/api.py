@@ -6,7 +6,7 @@ from fastapi.responses import ORJSONResponse
 
 from fastapi.middleware.cors import CORSMiddleware
 
-from core.dags.predict.predict_from_text import predict_from_text
+from dags.predict.predict_from_text import predict_from_text
 
 app = FastAPI(default_response_class=ORJSONResponse)
 
