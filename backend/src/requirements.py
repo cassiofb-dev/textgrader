@@ -9,8 +9,8 @@ def setup_ntlk():
 
   print('NLTK PUNKT setup finished')
 
-ESSAY_PATH = 'core/datalake/essay/raw'
-SHORT_ANSWER_PATH = 'core/datalake/short_answer/raw'
+ESSAY_PATH = 'datalake/essay/raw'
+SHORT_ANSWER_PATH = 'datalake/short_answer/raw'
 
 ESSAY_FILE = f"{ESSAY_PATH}/essays.xlsx"
 SHORT_ANSWER_FILE = f"{SHORT_ANSWER_PATH}/short_answers.xlsx"
