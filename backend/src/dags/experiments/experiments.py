@@ -28,7 +28,7 @@ logger.setLevel(config.LOGLEVEL)
 
 def experiments_with_lsi_topics(selected_container,text_range):
     logger.info("starting to train models with LSI features")
-    for topic_number in [10,20,30,40,50,100]:
+    for topic_number in config.LSI_TOPIC_NUMBERS:
         logger.info(f"training models with the {topic_number} dataset")
 
         print(topic_number)
