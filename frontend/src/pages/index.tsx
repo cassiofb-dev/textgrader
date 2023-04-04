@@ -1,25 +1,14 @@
 import { useEffect, useState } from "react";
 
-import ReactMarkdown from "react-markdown";
-
-import rehypeRaw from "rehype-raw";
-
 const Home = () => {
-    const [content, setContent] = useState('');
 
-    useEffect(() => {
-        fetch("/README.md").then((response) => {
-            response.text().then((text) => {
-                setContent(text);
-            });
-        });
-    }, []);
 
     return (
-        <div style={{display: "flex", justifyContent: "center"}}>
-            <div style={{maxWidth: "90vw", backgroundColor: "#fff", padding: "16px"}}>
-                <ReactMarkdown rehypePlugins={[rehypeRaw]} children={content} skipHtml={false}/>
-            </div>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+            <h1>Text Grader</h1>
+            <h4>
+
+            </h4>
         </div>
     );
 };
