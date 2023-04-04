@@ -20,7 +20,8 @@ const Redacao = () => {
 
         const data = response.data;
 
-        alert(`Nota da redação: ${data.grade}`);
+        // alert(`Nota da redação: ${data.grade}`);
+        alert("ok");
     }
 
     const clearEssay = () => {
