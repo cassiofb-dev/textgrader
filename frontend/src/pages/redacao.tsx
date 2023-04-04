@@ -54,7 +54,6 @@ const Redacao = () => {
 
             <Button
                 onClick={showModal}
-                // onClick={getEssayGrade} 
                 style={{ marginTop: '16px' }}
                 type="primary">Enviar redação
             </Button>
