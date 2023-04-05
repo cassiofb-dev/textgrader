@@ -1,13 +1,28 @@
 import axios from 'axios';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import { Button } from 'antd';
+import { Button, Modal, Skeleton } from 'antd';
 
 import TextArea from 'antd/lib/input/TextArea';
 
 const Redacao = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const showModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleOk = () => {
+        setIsModalOpen(false);
+    };
+
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    };
+
     const [essay, setEssay] = useState('');
+    const [essayGrade, setEssayGrade] = useState<number | null>(null);
 
     const handleChange = (event: any) => {
         setEssay(event.target.value);
@@ -20,12 +35,16 @@ const Redacao = () => {
 
         const data = response.data;
 
-        alert(`Nota da redação: ${data.grade}`);
+        setEssayGrade(data.grade);
     }
 
     const clearEssay = () => {
         setEssay('');
     }
+
+    useEffect(() => {
+        getEssayGrade();
+    }, []);
 
     return (
         <div style={{ padding: '0 50px' }}>
@@ -33,8 +52,15 @@ const Redacao = () => {
 
             <TextArea value={essay} onChange={handleChange} style={{ padding: 24, minHeight: 380, background: 'white' }} placeholder="Escreva sua redação aqui" />
 
-            <Button onClick={getEssayGrade} style={{ marginTop: '16px' }} type="primary">Enviar redação</Button>
+            <Button
+                onClick={showModal}
+                style={{ marginTop: '16px' }}
+                type="primary">Enviar redação
+            </Button>
 
+            <Modal title="Nota da redação" open={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer={null}>
+                {essayGrade ? `A nota da redação é ${essayGrade}` : <Skeleton paragraph={{ rows: 0 }} />}
+            </Modal>
             <Button onClick={clearEssay} style={{ marginTop: '16px', marginLeft: '16px' }} type="primary">Apagar redação</Button>
         </div>
     );

@@ -29,10 +29,20 @@ export default function App({ Component, pageProps }: AppProps) {
               Redação
             </Link>
           </Menu.Item>
+          <Menu.Item>
+            <Link href="/about">
+              About
+            </Link>
+          </Menu.Item>
         </Menu>
       </Header>
       <Content style={{ padding: '20px 0' }} ><Component {...pageProps} /></Content>
-      <Footer style={{ textAlign: 'center' }}>©2023 Created by Pettine - Cássio - Julie</Footer>
+      <Footer style={{ textAlign: 'center', gap: "6px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        ©2023 Created by
+        <a href="https://github.com/cassiofb-dev" style={{ textDecoration: "none", color: "#000", fontWeight: "bold" }}>Cassio</a>
+        <a href="https://github.com/juliemoura" style={{ textDecoration: "none", color: "#000", fontWeight: "bold" }}>Julie</a>
+        <a href="https://github.com/Gustavo-Pettine" style={{ textDecoration: "none", color: "#000", fontWeight: "bold" }}>Pettine</a>
+      </Footer>
     </Layout>
   )
 }
