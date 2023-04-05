@@ -14,8 +14,10 @@ const About = () => {
     }, []);
 
     return (
-        <div style={{ padding: "16px", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", gap: "10px" }}>
-            <ReactMarkdown rehypePlugins={[rehypeRaw]} children={content} skipHtml={false} />
+        <div style={{display: "flex", justifyContent: "center"}}>
+            <div style={{maxWidth: "90vw", padding: "16px"}}>
+                <ReactMarkdown rehypePlugins={[rehypeRaw]} children={content} skipHtml={false}/>
+            </div>
         </div>
     )
 }
