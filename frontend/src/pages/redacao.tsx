@@ -53,15 +53,25 @@ const Redacao = () => {
             <TextArea value={essay} onChange={handleChange} style={{ padding: 24, minHeight: 380, background: 'white' }} placeholder="Escreva sua redação aqui" />
 
             <Button
-                onClick={showModal}
+                onClick={clearEssay}
                 style={{ marginTop: '16px' }}
-                type="primary">Enviar redação
+                type="primary"
+                danger
+            >
+                Apagar redação
+            </Button>
+
+            <Button
+                onClick={showModal}
+                style={{ marginTop: '16px', marginLeft: '16px' }}
+                type="primary"
+            >
+                Enviar redação
             </Button>
 
             <Modal title="Nota da redação" open={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer={null}>
                 {essayGrade ? `A nota da redação é ${essayGrade}` : <Skeleton paragraph={{ rows: 0 }} />}
             </Modal>
-            <Button onClick={clearEssay} style={{ marginTop: '16px', marginLeft: '16px' }} type="primary">Apagar redação</Button>
         </div>
     );
 };
