@@ -30,8 +30,8 @@ export default function App({ Component, pageProps }: AppProps) {
             </Link>
           </Menu.Item>
           <Menu.Item>
-            <Link href="/about">
-              About
+            <Link href="/sobre">
+              Sobre
             </Link>
           </Menu.Item>
         </Menu>

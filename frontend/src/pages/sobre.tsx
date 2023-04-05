@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 
-const About = () => {
+const Sobre = () => {
     const [content, setContent] = useState('');
 
     useEffect(() => {
@@ -14,10 +14,12 @@ const About = () => {
     }, []);
 
     return (
-        <div style={{ padding: "16px", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", gap: "10px" }}>
-            <ReactMarkdown rehypePlugins={[rehypeRaw]} children={content} skipHtml={false} />
+        <div style={{display: "flex", justifyContent: "center"}}>
+            <div style={{maxWidth: "90vw", padding: "16px"}}>
+                <ReactMarkdown rehypePlugins={[rehypeRaw]} children={content} skipHtml={false}/>
+            </div>
         </div>
     )
 }
 
-export default About;
+export default Sobre;

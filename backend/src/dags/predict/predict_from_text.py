@@ -43,4 +43,4 @@ def predict_from_text(text: str = "testando 123 testando"):
 
     y_pred = model.predict(X)
 
-    return y_pred[0] * 10
+    return y_pred[0] * 100
