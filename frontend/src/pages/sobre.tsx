@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 
-const About = () => {
+const Sobre = () => {
     const [content, setContent] = useState('');
 
     useEffect(() => {
@@ -22,4 +22,4 @@ const About = () => {
     )
 }
 
-export default About;
+export default Sobre;
