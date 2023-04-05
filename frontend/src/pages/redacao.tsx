@@ -9,7 +9,8 @@ import TextArea from 'antd/lib/input/TextArea';
 const Redacao = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const showModal = () => {
+    const showModal = async () => {
+        await getEssayGrade();
         setIsModalOpen(true);
     };
 
@@ -41,10 +42,6 @@ const Redacao = () => {
     const clearEssay = () => {
         setEssay('');
     }
-
-    useEffect(() => {
-        getEssayGrade();
-    }, []);
 
     return (
         <div style={{ padding: '0 50px' }}>
