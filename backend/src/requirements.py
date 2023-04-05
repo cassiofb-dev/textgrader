@@ -9,8 +9,8 @@ def setup_ntlk():
 
   print('NLTK PUNKT setup finished')
 
-ESSAY_PATH = 'core/datalake/essay/raw'
-SHORT_ANSWER_PATH = 'core/datalake/short_answer/raw'
+ESSAY_PATH = 'datalake/essay/raw'
+SHORT_ANSWER_PATH = 'datalake/short_answer/raw'
 
 ESSAY_FILE = f"{ESSAY_PATH}/essays.xlsx"
 SHORT_ANSWER_FILE = f"{SHORT_ANSWER_PATH}/short_answers.xlsx"
@@ -72,7 +72,7 @@ def download_and_convert_uol_corpus_essays():
       if len(essay['texto']) == 0: continue
 
       corpus_essays_dict['essay_id'].append(essay_id)
-      corpus_essays_dict['essay_set'].append(essay_set)
+      corpus_essays_dict['essay_set'].append(1)
       corpus_essays_dict['essay'].append(essay['texto'])
       corpus_essays_dict['rater1_domain1'].append(essay['nota'] / 2)
       corpus_essays_dict['rater2_domain1'].append(essay['nota'] / 2)

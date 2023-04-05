@@ -52,8 +52,6 @@ def generate_topics_datasets(selected_container,text_range):
 
         logger.info('Starting to generate embeddings with universal sentence encoder')
 
-        print("deveria ter logado")
-
         for i in text_range:
             logger.info(f'text {i}')
 
