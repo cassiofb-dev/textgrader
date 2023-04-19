@@ -8,7 +8,7 @@ from nltk.tokenize import word_tokenize
 from dags import config
 import logging
 
-import logging
+import tensorflow_text
 
 # create logger
 logger = logging.getLogger(__name__)
@@ -25,7 +25,7 @@ class text_embedder():
 class USE_embedder(text_embedder):
     def __init__(self):
         super().__init__()
-        self.embedder = hub.load("https://tfhub.dev/google/universal-sentence-encoder/4")
+        self.embedder = hub.load("https://tfhub.dev/google/universal-sentence-encoder-multilingual-large/3")
 
     def embed_words(self,word_vector):
         embeddings = self.embedder(word_vector)
