@@ -1,15 +1,20 @@
 import os
 import logging
 
-replacements = {'the the' : 'the',
-                'to to' : 'to',
-                'thats' : "that\'s",
-                'dont' : "don\'t",
-                'cause' : 'because',
-                'becouse' : 'because',
-                'cuz' : 'because',
-                'bc' : 'because'}
-
+replacements = {'vc' : 'você',
+                'td' : 'tudo',
+                'tbm' : 'também',
+                'q' : "que",
+                'oq' : "o que",
+                'mt' : 'muito',
+                'etc' : 'entre outras coisas',
+                'n' : 'não',
+                'msm' : 'mesmo',
+                'agr' : 'agora',
+                'dnv' : 'de novo',
+                'hj' : 'hoje',
+                'nd' : 'nada',
+            }
 #ESSAY_COLUMNS = ["essay_id","essay_set","essay","domain1_score","domain2_score"]
 #SHORT_ANSWER_COLUMNS = ["essay_id","essay_set","essay","Score1","Score2"]
 
