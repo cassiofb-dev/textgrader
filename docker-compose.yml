@@ -15,6 +15,9 @@ services:
       - 8000:8000
     volumes:
       - ./backend:/backend
+    user: 1000:1000
+    cpus: "4"
+    mem_limit: 4096m
 
   frontend:
     container_name: frontend
@@ -25,3 +28,6 @@ services:
       - 3000:3000
     volumes:
       - ./frontend:/frontend
+    user: 1000:1000
+    cpus: "4"
+    mem_limit: 4096m

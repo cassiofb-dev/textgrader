@@ -5,7 +5,7 @@ import pandas as pd
 from urllib import request
 
 def setup_ntlk():
-  nltk.download('punkt')
+  nltk.download('punkt', download_dir='/backend/src/datalake/nltk_data')
 
   print('NLTK PUNKT setup finished')
 
@@ -61,7 +61,7 @@ def download_and_convert_uol_corpus_essays():
       if len(essay['corrected_text']) == 0: continue
 
       corpus_essays_dict['essay_id'].append(essay_id)
-      corpus_essays_dict['essay_set'].append(essay_set)
+      corpus_essays_dict['essay_set'].append(1)
       corpus_essays_dict['essay'].append(essay['corrected_text'])
       corpus_essays_dict['domain1_score'].append(essay['points']['knowledge'])
       corpus_essays_dict['domain2_score'].append(essay['points']['cohesion'])
