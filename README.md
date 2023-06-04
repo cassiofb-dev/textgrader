@@ -1,3 +1,5 @@
+# THIS REPOSITORY WAS TRANSFERED TO [https://github.com/MLRG-CEFET-RJ/textgrader](https://github.com/MLRG-CEFET-RJ/textgrader)
+
 <h1 align="center">
   Text Grader
 </h1>
